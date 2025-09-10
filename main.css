@@ -7,10 +7,11 @@
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 20;
-  color: lightgrey;
-  background-color: #f5f5f5;
+  line-height: 3;
+  color: green;
+  background-color: #b3b89d;
   padding: 20px;
+  align-items: center;
 }
 
 /* Header styles */
@@ -24,10 +25,11 @@ header {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-header h1 {
+header h2 {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
   font-weight: 300;
+  text-align: center;
 }
 
 header p {
@@ -43,23 +45,23 @@ main {
 
 /* Section styles */
 section {
-  background: black;
+  background: rgb(23, 128, 37);
   margin-bottom: 2rem;
   padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-left: 4px solid #667eea;
+  box-shadow: 0 2px 4px rgba(6, 49, 3, 0.1);
+  border-left: 4px solid #296b43;
 }
 
 section h2 {
-  color: #667eea;
+  color: #b3b89d;
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
   font-weight: 500;
 }
 
 section p {
-  color: #666;
+  color: #b3b89d;
   margin-bottom: 1rem;
   font-size: 1rem;
 }

@@ -15,15 +15,72 @@ const users = [
 ];
 
 // broken test data for exercise 6
+const brokenUsers = [
+  { id: 1, age: 23 }, // missing name
+  { id: 2, name: "Darth Vader" }, // missing age
+  { id: 3 }, // missing everything
+  { id: 4, name: "Obi-Wan Kenobi", age: 57 }
+];
 
-// 1. Print out the names of each character in the console, then render them in the HTML list with id "names-list"
+// ✅ Utility: render list items into a <ul>
+function renderList(array, listId, errorContainerId) {
+  const ul = document.getElementById(listId);
+  const errorDiv = errorContainerId ? document.getElementById(errorContainerId) : null;
 
-// 2. Print out the names of characters whose age is less than 40 in the console, then render them in the HTML list with id "young-characters-list"
+  ul.innerHTML = ""; // clear list
+  if (errorDiv) errorDiv.innerHTML = ""; // clear errors
 
-// 3. Create a reusable function that takes any array and uses logic to render a list of character names in the HTML. Use this function to populate the list with id "function-list"
+  if (array.length === 0) {
+    const emptyMsg = document.createElement("li");
+    emptyMsg.textContent = "No results found.";
+    emptyMsg.classList.add("empty-list");
+    ul.appendChild(emptyMsg);
+    return;
+  }
 
-// 4. Create a function that takes an array and an age threshold parameter. The function should only display characters whose age is below the given number. Render results in the list with id "age-filter-list"
+  array.forEach(obj => {
+    try {
+      if (!obj.name) {
+        throw new Error(`Missing "name" property in object: ${JSON.stringify(obj)}`);
+      }
+      const li = document.createElement("li");
+      li.textContent = obj.name;
+      ul.appendChild(li);
+    } catch (err) {
+      console.error(err.message);
+      if (errorDiv) {
+        const msg = document.createElement("div");
+        msg.textContent = err.message;
+        msg.classList.add("error-message");
+        errorDiv.appendChild(msg);
+      }
+    }
+  });
+}
 
-// 5. Add error handling to your functions that will log an error message using console.error() if any object doesn't have a "name" property. Display any error messages in the div with id "error-messages"
+// ✅ 1. Print all names
+console.log("All characters:");
+users.forEach(u => console.log(u.name));
+renderList(users, "names-list");
 
-// 6. Test your error handling by creating a second array that's intentionally broken (missing name properties) and passing it to your functions. Verify that your error handling works correctly and displays errors in the div with id "broken-array-errors"
+// ✅ 2. Filter age < 40
+const under40 = users.filter(u => u.age < 40);
+console.log("Characters under 40:");
+under40.forEach(u => console.log(u.name));
+renderList(under40, "young-characters-list");
+
+// ✅ 3. Reusable function demo
+renderList(users, "function-list");
+
+// ✅ 4. Function with age threshold
+function renderByAge(array, maxAge, listId) {
+  const filtered = array.filter(u => u.age < maxAge);
+  renderList(filtered, listId);
+}
+renderByAge(users, 50, "age-filter-list"); // demo with < 50
+
+// ✅ 5. Error handling with proper messages
+renderList(users, "error-handling-list", "error-messages");
+
+// ✅ 6. Broken array test
+renderList(brokenUsers, "broken-array-list", "broken-array-errors");
