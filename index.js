@@ -16,14 +16,15 @@ const users = [
 
 // broken test data for exercise 6
 const brokenUsers = [
-  { id: 1, age: 23 }, // missing name
-  { id: 2, name: "Darth Vader" }, // missing age
-  { id: 3 }, // missing everything
+  { id: 1, age: 23 }, 
+  { id: 2, name: "Darth Vader", age: 67 }, 
+  { id: 3 , age: 40}, 
   { id: 4, name: "Obi-Wan Kenobi", age: 57 }
 ];
 
-// ✅ Utility: render list items into a <ul>
-function renderList(array, listId, errorContainerId) {
+
+// Reusable function to render list with optional error handling and success/error styling
+function renderList(array, listId, errorContainerId, useSuccessStyle = false) {
   const ul = document.getElementById(listId);
   const errorDiv = errorContainerId ? document.getElementById(errorContainerId) : null;
 
@@ -39,48 +40,55 @@ function renderList(array, listId, errorContainerId) {
   }
 
   array.forEach(obj => {
-    try {
-      if (!obj.name) {
-        throw new Error(`Missing "name" property in object: ${JSON.stringify(obj)}`);
-      }
-      const li = document.createElement("li");
-      li.textContent = obj.name;
-      ul.appendChild(li);
-    } catch (err) {
-      console.error(err.message);
+    if (!obj.name) {
+      const errorMsg = `Missing "name" property in object: ${JSON.stringify(obj)}`;
+      console.error(errorMsg, obj);
+
       if (errorDiv) {
         const msg = document.createElement("div");
-        msg.textContent = err.message;
+        msg.textContent = errorMsg;
         msg.classList.add("error-message");
         errorDiv.appendChild(msg);
       }
+    } 
+    
+    else {
+      const li = document.createElement("li");
+      li.innerHTML = useSuccessStyle
+        ? `<span class="success">${obj.name}</span>` // ? = is true
+        : obj.name;                                  // : = is false
+      ul.appendChild(li);
     }
   });
 }
 
-// ✅ 1. Print all names
+//1. Print all names
 console.log("All characters:");
 users.forEach(u => console.log(u.name));
 renderList(users, "names-list");
 
-// ✅ 2. Filter age < 40
+//2. Filter age < 40
 const under40 = users.filter(u => u.age < 40);
 console.log("Characters under 40:");
 under40.forEach(u => console.log(u.name));
 renderList(under40, "young-characters-list");
 
-// ✅ 3. Reusable function demo
+//3. Reusable function demo
 renderList(users, "function-list");
 
-// ✅ 4. Function with age threshold
+//4. Function with age threshold
 function renderByAge(array, maxAge, listId) {
   const filtered = array.filter(u => u.age < maxAge);
   renderList(filtered, listId);
 }
 renderByAge(users, 50, "age-filter-list"); // demo with < 50
 
-// ✅ 5. Error handling with proper messages
+//5. Error Handling with clean array
 renderList(users, "error-handling-list", "error-messages");
 
-// ✅ 6. Broken array test
-renderList(brokenUsers, "broken-array-list", "broken-array-errors");
+//6. Broken array test (success + error)
+renderList(brokenUsers, "broken-array-list", "broken-array-errors", true);
+
+//*BONUS* 7. Empty list demo
+const emptyArray = [];
+renderList(emptyArray, "empty-list", "empty-list-errors");

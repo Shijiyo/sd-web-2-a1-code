@@ -1,4 +1,4 @@
-<!doctype html>
+<!doctype html> 
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -20,7 +20,9 @@
     <main>
       <section id="exercise-1">
         <h2>Exercise 1: Print Character Names</h2>
-        <p>Print out the names of each character in the console.</p>
+          <p>
+            Print out the <code>name</code> of each character in the console.
+          </p>
         <div class="output">
           <h3>Results:</h3>
           <ul id="names-list"></ul>
@@ -29,7 +31,10 @@
 
       <section id="exercise-2">
         <h2>Exercise 2: Filter by Age</h2>
-        <p>Print out the names of characters whose age is less than 40.</p>
+          <p>
+            Print out the <code>name</code> of characters whose<code>age</code> 
+            is less than <code>40</code>.
+          </p>
         <div class="output">
           <h3>Results:</h3>
           <ul id="young-characters-list"></ul>
@@ -38,10 +43,11 @@
 
       <section id="exercise-3">
         <h2>Exercise 3: Reusable Function for Lists</h2>
-        <p>
-          Create a function that takes any array and renders a list of character
-          names on the page.
-        </p>
+          <p>
+            Create a function <code>renderList()</code> that takes any 
+            <code>array</code> and renders a list of character 
+            <code>name</code> values on the page.
+          </p>
         <div class="output">
           <h3>Results:</h3>
           <ul id="function-list"></ul>
@@ -50,10 +56,11 @@
 
       <section id="exercise-4">
         <h2>Exercise 4: Age Filter Function</h2>
-        <p>
-          Create a function that takes an array and an age threshold, then
-          displays characters below that age.
-        </p>
+           <p>
+              Create a function <code>renderByAge()</code> that takes an 
+              <code>array</code> and an <code>age</code> threshold, then 
+              displays characters below that age.
+            </p>
         <div class="output">
           <h3>Results:</h3>
           <ul id="age-filter-list"></ul>
@@ -62,7 +69,11 @@
 
       <section id="exercise-5">
         <h2>Exercise 5: Error Handling</h2>
-        <p>Add error handling to check if objects have a "name" property.</p>
+            <p>
+              Add error handling to check if objects have a 
+              <code>name</code> property. Use <code>console.error()</code> 
+              to log missing values.
+            </p>
         <div class="output">
           <h3>Results:</h3>
           <ul id="error-handling-list"></ul>
@@ -72,11 +83,26 @@
 
       <section id="exercise-6">
         <h2>Exercise 6: Test Error Handling</h2>
-        <p>Test your error handling by using a broken array.</p>
+          <p>
+            Test your error handling by using a broken <code>array</code> 
+            with missing <code>name</code> properties.
+          </p>
         <div class="output">
           <h3>Results:</h3>
           <ul id="broken-array-list"></ul>
           <div id="broken-array-errors"></div>
+        </div>
+      </section>
+
+      <section id="exercise-7">
+        <h2>*BONUS* Exercise 7: Empty List</h2>
+          <p>
+            Test your function with an empty <code>array</code> to ensure 
+            it handles it properly.
+          </p>
+        <div class="output">
+          <h3>Results:</h3>
+          <ul id="empty-list"></ul>
         </div>
       </section>
     </main>
