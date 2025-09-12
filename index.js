@@ -31,6 +31,7 @@ function renderList(array, listId, errorContainerId, useSuccessStyle = false) {
   ul.innerHTML = ""; // clear list
   if (errorDiv) errorDiv.innerHTML = ""; // clear errors
 
+  // Handle empty array case
   if (array.length === 0) {
     const emptyMsg = document.createElement("li");
     emptyMsg.textContent = "No results found.";
@@ -39,16 +40,17 @@ function renderList(array, listId, errorContainerId, useSuccessStyle = false) {
     return;
   }
 
+  // Process each object in the array
   array.forEach(obj => {
     if (!obj.name) {
       const errorMsg = `Missing "name" property in object: ${JSON.stringify(obj)}`;
       console.error(errorMsg, obj);
 
       if (errorDiv) {
-        const msg = document.createElement("div");
-        msg.textContent = errorMsg;
-        msg.classList.add("error-message");
-        errorDiv.appendChild(msg);
+        const li = document.createElement("li");
+        li.textContent = errorMsg;
+        li.classList.add("error-message");
+        errorDiv.appendChild(li);
       }
     } 
     
